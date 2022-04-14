@@ -1,5 +1,5 @@
 {
-  "name": "html-hello",
+  "name": "tree-menu",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -23,6 +23,6 @@
     "@vitejs/plugin-react": "^1.3.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.2",
-    "vite-dts": "^1.0.4"
+    "vite-plugin-dts": "^1.0.5"
   }
 }
