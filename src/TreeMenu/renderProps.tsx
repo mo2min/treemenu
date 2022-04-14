@@ -49,6 +49,7 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
   isRtl = false,
 }) => {
 
+  const paddinDir = isRtl ? "paddingRight": "paddingLeft"
     
     return(
   <li
@@ -60,7 +61,7 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
       { 'rstm-tree-item-rtl': isRtl }
     )}
     style={{
-      paddingLeft: `${DEFAULT_PADDING +
+      paddinDir: `${DEFAULT_PADDING +
         ICON_SIZE * (hasNodes ? 0 : 1) +
         level * LEVEL_SPACE}rem`,
       ...style,
