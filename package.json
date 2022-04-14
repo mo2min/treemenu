@@ -1,17 +1,17 @@
 {
   "name": "tree-menu",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "files": [
     "dist"
   ],
-  "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.js",
+  "main": "./dist/tree-menu.umd.js",
+  "module": "./dist/tree-menu.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.es.js",
-      "require": "./dist/my-lib.umd.js"
+      "import": "./dist/tree-menu.es.js",
+      "require": "./dist/tree-menu.umd.js"
     }
   },
   "scripts": {
