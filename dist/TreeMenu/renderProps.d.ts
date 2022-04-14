@@ -1,5 +1,5 @@
-import React from 'react';
-import { Item } from './walk';
+import React from "react";
+import { Item } from "./walk";
 export interface TreeMenuItem extends Item {
     active?: boolean;
     onClick: (event: React.MouseEvent<HTMLLIElement>) => void;

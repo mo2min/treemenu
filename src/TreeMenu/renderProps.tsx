@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
-import classNames from 'classnames';
+import React, { ReactNode } from "react";
+import classNames from "classnames";
 
-import { Item } from './walk';
+import { Item } from "./walk";
 
 const DEFAULT_PADDING = 0.75;
 const ICON_SIZE = 2;
@@ -42,50 +42,52 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
   toggleNode,
   active,
   focused,
-  openedIcon = '-',
-  closedIcon = '+',
-  label = 'unknown',
+  openedIcon = "-",
+  closedIcon = "+",
+  label = "unknown",
   style = {},
   isRtl = false,
 }) => {
+  const padding = `${
+    DEFAULT_PADDING + ICON_SIZE * (hasNodes ? 0 : 1) + level * LEVEL_SPACE
+  }rem`;
+  const styleRight = { paddingRight: padding, ...style };
+  const styleLeft = { paddingLeft: padding, ...style };
+  return (
+    <li
+      className={classNames(
+        "rstm-tree-item",
+        `rstm-tree-item-level${level}`,
+        { "rstm-tree-item--active": active },
+        { "rstm-tree-item--focused": focused },
+        { "rstm-tree-item-rtl": isRtl }
+      )}
+      style={isRtl ? styleRight : styleLeft}
+      role="button"
+      aria-pressed={active}
+      onClick={onClick}
+    >
+      {hasNodes && (
+        <div
+          className="rstm-toggle-icon"
+          onClick={(e) => {
+            hasNodes && toggleNode && toggleNode();
+            e.stopPropagation();
+          }}
+        >
+          <ToggleIcon
+            on={isOpen}
+            openedIcon={openedIcon}
+            closedIcon={closedIcon}
+          />
+        </div>
+      )}
+      {label}
+    </li>
+  );
+};
 
-  const paddinDir = isRtl ? "paddingRight": "paddingLeft"
-    
-    return(
-  <li
-    className={classNames(
-      'rstm-tree-item',
-      `rstm-tree-item-level${level}`,
-      { 'rstm-tree-item--active': active },
-      { 'rstm-tree-item--focused': focused },
-      { 'rstm-tree-item-rtl': isRtl }
-    )}
-    style={{
-      paddinDir: `${DEFAULT_PADDING +
-        ICON_SIZE * (hasNodes ? 0 : 1) +
-        level * LEVEL_SPACE}rem`,
-      ...style,
-    }}
-    role="button"
-    aria-pressed={active}
-    onClick={onClick}
-  >
-    {hasNodes && (
-      <div
-        className="rstm-toggle-icon"
-        onClick={e => {
-          hasNodes && toggleNode && toggleNode();
-          e.stopPropagation();
-        }}
-      >
-        <ToggleIcon on={isOpen} openedIcon={openedIcon} closedIcon={closedIcon} />
-      </div>
-    )}
-    {label}
-  </li>
-)};
-
-export const defaultChildren: TreeMenuChildren = ({ search, items,isRtl }) => {
+export const defaultChildren: TreeMenuChildren = ({ search, items, isRtl }) => {
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     search && search(value);
