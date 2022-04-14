@@ -367,7 +367,7 @@ const ItemComponent = ({
       "rstm-tree-item-rtl": isRtl
     }),
     style: __spreadValues({
-      paddingLeft: `${DEFAULT_PADDING + ICON_SIZE * (hasNodes ? 0 : 1) + level * LEVEL_SPACE}rem`
+      paddinDir: `${DEFAULT_PADDING + ICON_SIZE * (hasNodes ? 0 : 1) + level * LEVEL_SPACE}rem`
     }, style),
     role: "button",
     "aria-pressed": active,
