@@ -14,6 +14,8 @@ export declare type TreeMenuProps = {
     resetOpenNodesOnDataUpdate?: boolean;
     hasSearch?: boolean;
     isRtl?: boolean;
+    isOneLevel?: boolean;
+    searchPlaceholder?: string;
     cacheSearch?: boolean;
     onClickItem?: (props: Item) => void;
     debounceTime?: number;

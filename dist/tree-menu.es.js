@@ -356,7 +356,8 @@ const ItemComponent = ({
   closedIcon = "+",
   label = "unknown",
   style = {},
-  isRtl = false
+  isRtl = false,
+  isOneLevel = false
 }) => {
   const padding = `${DEFAULT_PADDING + ICON_SIZE * (hasNodes ? 0 : 1) + level * LEVEL_SPACE}rem`;
   const styleRight = __spreadValues({
@@ -373,7 +374,7 @@ const ItemComponent = ({
     }, {
       "rstm-tree-item-rtl": isRtl
     }),
-    style: isRtl ? styleRight : styleLeft,
+    style: isRtl && !isOneLevel ? styleRight : styleLeft,
     role: "button",
     "aria-pressed": active,
     onClick,
@@ -394,7 +395,9 @@ const ItemComponent = ({
 const defaultChildren = ({
   search,
   items,
-  isRtl
+  isRtl,
+  isOneLevel,
+  searchPlaceholder
 }) => {
   const onSearch = (e) => {
     const {
@@ -405,9 +408,9 @@ const defaultChildren = ({
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [search && /* @__PURE__ */ jsx("input", {
       className: "rstm-search",
-      "aria-label": "Type and search",
+      "aria-label": searchPlaceholder ? searchPlaceholder : "Type and search",
       type: "search",
-      placeholder: "Type and search",
+      placeholder: searchPlaceholder ? searchPlaceholder : "Type and search",
       onChange: onSearch
     }), /* @__PURE__ */ jsx("ul", {
       className: "rstm-tree-item-group",
@@ -418,7 +421,8 @@ const defaultChildren = ({
           "key"
         ]);
         return /* @__PURE__ */ jsx(ItemComponent, __spreadValues({
-          isRtl
+          isRtl,
+          isOneLevel
         }, props), key);
       })
     })]
@@ -632,7 +636,9 @@ class TreeMenu extends require$$0.Component {
       children,
       hasSearch,
       disableKeyboard,
-      isRtl
+      isRtl,
+      isOneLevel,
+      searchPlaceholder
     } = this.props;
     const {
       searchTerm
@@ -646,7 +652,9 @@ class TreeMenu extends require$$0.Component {
       resetOpenNodes,
       items,
       searchTerm,
-      isRtl
+      isRtl,
+      isOneLevel,
+      searchPlaceholder
     } : {
       items,
       resetOpenNodes
