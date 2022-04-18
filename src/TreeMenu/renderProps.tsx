@@ -29,7 +29,9 @@ export interface TreeMenuItem extends Item {
 export type TreeMenuChildren = (props: {
   search?: (term: string) => void;
   isRtl?: boolean;
+  isOneLevel?: boolean;
   searchTerm?: string;
+  searchPlaceholder?: string;
   items: TreeMenuItem[];
   resetOpenNodes?: (openNodes?: string[]) => void;
 }) => JSX.Element;
@@ -47,6 +49,7 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
   label = "unknown",
   style = {},
   isRtl = false,
+  isOneLevel = false,
 }) => {
   const padding = `${
     DEFAULT_PADDING + ICON_SIZE * (hasNodes ? 0 : 1) + level * LEVEL_SPACE
@@ -62,7 +65,7 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
         { "rstm-tree-item--focused": focused },
         { "rstm-tree-item-rtl": isRtl }
       )}
-      style={isRtl ? styleRight : styleLeft}
+      style={isRtl && !isOneLevel ? styleRight : styleLeft}
       role="button"
       aria-pressed={active}
       onClick={onClick}
@@ -87,7 +90,7 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
   );
 };
 
-export const defaultChildren: TreeMenuChildren = ({ search, items, isRtl }) => {
+export const defaultChildren: TreeMenuChildren = ({ search, items, isRtl,isOneLevel,searchPlaceholder }) => {
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     search && search(value);
@@ -98,15 +101,15 @@ export const defaultChildren: TreeMenuChildren = ({ search, items, isRtl }) => {
       {search && (
         <input
           className="rstm-search"
-          aria-label="Type and search"
+          aria-label={searchPlaceholder? searchPlaceholder : "Type and search"}
           type="search"
-          placeholder="Type and search"
+          placeholder={searchPlaceholder? searchPlaceholder : "Type and search"}
           onChange={onSearch}
         />
       )}
       <ul className="rstm-tree-item-group">
         {items.map(({ key, ...props }) => (
-          <ItemComponent key={key} isRtl={isRtl} {...props}></ItemComponent>
+          <ItemComponent key={key} isRtl={isRtl} isOneLevel={isOneLevel} {...props} ></ItemComponent>
         ))}
       </ul>
     </>

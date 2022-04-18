@@ -28,7 +28,8 @@
 
 }
 .rstm-tree-item-rtl {
-  /* empty for now */
+  direction: rtl;
+  text-align: right;
 }
 .rstm-tree-item--active {
   color: white;

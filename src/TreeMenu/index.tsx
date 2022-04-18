@@ -24,6 +24,8 @@ export type TreeMenuProps = {
   resetOpenNodesOnDataUpdate?: boolean;
   hasSearch?: boolean;
   isRtl?: boolean;
+  isOneLevel?: boolean;
+  searchPlaceholder?: string;
   cacheSearch?: boolean;
   onClickItem?: (props: Item) => void;
   debounceTime?: number;
@@ -167,7 +169,7 @@ class TreeMenu extends React.Component<TreeMenuProps, TreeMenuState> {
   };
 
   render() {
-    const { children, hasSearch, disableKeyboard,isRtl } = this.props;
+    const { children, hasSearch, disableKeyboard,isRtl,isOneLevel,searchPlaceholder } = this.props;
     const { searchTerm } = this.state;
 
     const search = this.search;
@@ -181,7 +183,9 @@ class TreeMenu extends React.Component<TreeMenuProps, TreeMenuState> {
           resetOpenNodes,
           items,
           searchTerm,
-          isRtl
+          isRtl,
+          isOneLevel,
+          searchPlaceholder
         }
       : { items, resetOpenNodes };
         

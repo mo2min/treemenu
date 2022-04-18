@@ -8,16 +8,16 @@ import TreeMenu from './TreeMenu'
 const treeData = [
   {
     key: 'first-level-node-1',
-    label: 'Node 1 at the first level',
+    label: 'نموذج اول',
 
     nodes: [
       {
         key: 'second-level-node-1',
-        label: 'Node 1 at the second level',
+        label: 'نوذج رئيس',
         nodes: [
           {
             key: 'third-level-node-1',
-            label: 'Last node of the branch',
+            label: 'نموذج فرعي',
             nodes: [] // you can remove the nodes property or leave it as an empty array
           },
         ],
@@ -33,8 +33,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
-      <TreeMenu data={treeData} isRtl={true}/>
+    <div style={{direction:"rtl",width:"300px"}}>
+      <TreeMenu data={treeData} isRtl={true} isOneLevel={true} searchPlaceholder="البحث عن"/>
     </div> 
   )
 }

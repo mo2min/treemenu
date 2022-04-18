@@ -7,7 +7,9 @@ export interface TreeMenuItem extends Item {
 }
 export declare type TreeMenuChildren = (props: {
     search?: (term: string) => void;
+    searchPlaceholder?: string;
     isRtl?: boolean;
+    isOneLevel?: boolean;
     searchTerm?: string;
     items: TreeMenuItem[];
     resetOpenNodes?: (openNodes?: string[]) => void;
