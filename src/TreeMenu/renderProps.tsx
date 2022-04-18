@@ -54,8 +54,9 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
   const padding = `${
     DEFAULT_PADDING + ICON_SIZE * (hasNodes ? 0 : 1) + level * LEVEL_SPACE
   }rem`;
-  const styleRight = { paddingRight: padding, ...style };
-  const styleLeft = { paddingLeft: padding, ...style };
+
+  const styleRight = { paddingRight: !isOneLevel && padding, ...style };
+  const styleLeft = { paddingLeft: !isOneLevel && padding, ...style };
   return (
     <li
       className={classNames(
@@ -63,9 +64,10 @@ export const ItemComponent: React.FunctionComponent<TreeMenuItem> = ({
         `rstm-tree-item-level${level}`,
         { "rstm-tree-item--active": active },
         { "rstm-tree-item--focused": focused },
-        { "rstm-tree-item-rtl": isRtl }
+        { "rstm-tree-item-rtl": isRtl },
+        { "rstm-tree-item-onlevel": isOneLevel }
       )}
-      style={isRtl && !isOneLevel ? styleRight : styleLeft}
+      style={isRtl ? styleRight : styleLeft}
       role="button"
       aria-pressed={active}
       onClick={onClick}

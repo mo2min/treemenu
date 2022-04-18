@@ -361,10 +361,10 @@ const ItemComponent = ({
 }) => {
   const padding = `${DEFAULT_PADDING + ICON_SIZE * (hasNodes ? 0 : 1) + level * LEVEL_SPACE}rem`;
   const styleRight = __spreadValues({
-    paddingRight: padding
+    paddingRight: !isOneLevel && padding
   }, style);
   const styleLeft = __spreadValues({
-    paddingLeft: padding
+    paddingLeft: !isOneLevel && padding
   }, style);
   return /* @__PURE__ */ jsxs("li", {
     className: classNames("rstm-tree-item", `rstm-tree-item-level${level}`, {
@@ -373,8 +373,10 @@ const ItemComponent = ({
       "rstm-tree-item--focused": focused
     }, {
       "rstm-tree-item-rtl": isRtl
+    }, {
+      "rstm-tree-item-onlevel": isOneLevel
     }),
-    style: isRtl && !isOneLevel ? styleRight : styleLeft,
+    style: isRtl ? styleRight : styleLeft,
     role: "button",
     "aria-pressed": active,
     onClick,
